@@ -2,9 +2,34 @@ var async = require("async");
 var _ = require("lodash");
 var { date } = require("./Date");
 var DomainSh = require("../lib/models/Domain");
+var Belief = require("../lib/models/Belief");
+var ObjectId = require("mongodb").ObjectID;
 
 class Domain {
-  //extrae “dependencias”, “lugares”, “personas” “preguntas” y “fechas”
+  constructor() {
+    this.questionWords = [
+      {
+        eP: ["qué", "quién", "que", "quien"],
+        eR: ["organizaciones"]
+      },
+      {
+        eP: ["quién", "quien"],
+        eR: ["personas"]
+      },
+      {
+        eP: ["dónde", "donde"],
+        eR: ["lugares"]
+      },
+      {
+        eP: ["dónde", "donde"],
+        eR: ["miscelaneas"]
+      },
+      {
+        eP: ["cuándo", "cuando"],
+        eR: ["fechas"]
+      }
+    ];
+  }
   extractEntityFromDomain(cbEEFD, reg) {
     let res = reg.respuesta;
     let sol = reg.solicitud;
@@ -14,7 +39,7 @@ class Domain {
         //get entityt respuesta from domain
         gERFD: cb => {
           let d = [
-            { type: "@DEPENDENCIES", path: "dependencias" },
+            //{ type: "@DEPENDENCIES", path: "dependencias" },
             { type: "@PLACES", path: "lugares" },
             { type: "@OWN_NAMES_SURNAMES", path: "personas" },
             { type: "@INTERROGATIVE_SENTENCES", path: "preguntas" },
@@ -37,14 +62,28 @@ class Domain {
           console.timeEnd("rEFRR");
           console.time("gESFD");
           let d = [
-            { type: "@DEPENDENCIES", path: "dependencias" },
+            //{ type: "@DEPENDENCIES", path: "dependencias" },
             { type: "@PLACES", path: "lugares" },
             { type: "@OWN_NAMES_SURNAMES", path: "personas" },
             { type: "@INTERROGATIVE_SENTENCES", path: "preguntas" },
-            { type: "@DATE", path: "fechas" }
+            { type: "@DATE", path: "fechas" },
+            { type: "@VERBS", path: "verbosSolcitudes" }
             //{ type: "@CONJUGATED_VERBS", path: "verbos" }
           ];
+
           console.time("getEntityFromDomains2");
+
+          _.set(
+            reg,
+            "entidadesRespuesta.organizaciones",
+            reg.dependencia.split(".")
+          );
+          _.set(
+            reg,
+            "entidadesRespuesta.dependencias",
+            reg.dependencia.split(".")
+          );
+
           this.getEntityFromDomains(cb, reg, sol, "entidadesSolicitud", d);
         },
         //remove entity from result
@@ -69,10 +108,14 @@ class Domain {
     let eSol = _.compact(
       _.concat(e.fechas, e.dependencias, e.lugares, e.preguntas)
     );
-    let respuesta = gERFD.respuesta;
 
-    eSol.map(w => (respuesta = _.replace(respuesta, w, "")));
-    this.remStopWords(cb, respuesta, gERFD, domain);
+    let entidad =
+      domain.entidad == "entidadesRespuesta"
+        ? gERFD.respuesta
+        : gERFD.solicitud;
+
+    eSol.map(w => (entidad = _.replace(entidad, w, "")));
+    this.remStopWords(cb, entidad, gERFD, domain);
   }
 
   remStopWords(cb, source, gERFD, domain) {
@@ -84,10 +127,10 @@ class Domain {
           "@GREETINGS",
           "@FAREWELLS",
           "@VERBS",
-          //"@CONJUGATED_VERBS",
           "@ADVERBS_OF_TIME",
           "@ADVERBS_OF_PLACE",
           "@POSSESSIVE_ADJETIVES"
+          //"@CONJUGATED_VERBS"
         ]
       }
     })
@@ -155,16 +198,27 @@ class Domain {
     let entidades = collection.entidades;
     let registros = collection.registros;
 
-    //palabras descartadas, candidatas
+    let arrDep = [];
     let arrPalDesc = [];
     let arrPalCan = [];
     let arrEntLugares = [];
     let arrEntFechas = [];
+    let arrEntDependencias = [];
     let arrEntOrganizaciones = [];
     let arrEntPersonas = [];
     let arrEntMiscelaneas = [];
     let arrEntPreguntas = [];
     let arrEntVerbosDelDominio = [];
+    let arrPreguntasGeneradas = [];
+
+    registros.forEach(registro => {
+      registro.dependencia
+        .toLowerCase()
+        .split(".")
+        .forEach(element => {
+          arrDep.push(element.trim());
+        });
+    });
 
     registros.forEach(registro => {
       arrEntFechas = _.compact(
@@ -174,10 +228,20 @@ class Domain {
         )
       );
 
+      if (registro.preguntasGeneradas != undefined)
+        arrPreguntasGeneradas.push(registro.preguntasGeneradas);
+
       arrEntLugares = _.compact(
         _.concat(
           registro.entidadesSolicitud.lugares,
           registro.entidadesRespuesta.lugares
+        )
+      );
+
+      arrEntDependencias = _.compact(
+        _.concat(
+          registro.entidadesSolicitud.dependencias,
+          registro.entidadesRespuesta.dependencias
         )
       );
 
@@ -221,40 +285,167 @@ class Domain {
 
     arrPalCan = _.compact(
       _.concat(
+        arrEntDependencias,
         arrEntLugares,
         arrEntFechas,
         arrEntOrganizaciones,
         arrEntPersonas,
         arrEntMiscelaneas,
         arrEntPreguntas,
-        arrEntVerbosDelDominio
+        arrEntVerbosDelDominio,
+        arrPreguntasGeneradas
       )
     );
 
-    /*
-      [
-        "",
-        "5 de diciembre de 2018,5 de diciembre",
-        ",",
-        "",
-        "fecha,cierre,5,diciembre,fecha,cierre",
-        "cuando",
-        "pueden,informar,es,fecha,cierre,"
-      ]
-    */
-
     //compilation
+    contexto.dependencias = arrDep;
     contexto.palabrasDescartadas = arrPalDesc;
+    contexto.palabrasRelevantes = arrPalCan;
     contexto.palabrasCandidatas = arrPalCan;
-    entidades.Lugares = arrEntLugares;
+    contexto.dependencias = arrEntDependencias;
+    contexto.preguntasGeneradas = arrPreguntasGeneradas;
+    entidades.lugares = arrEntLugares;
     entidades.Fechas = arrEntFechas;
-    entidades.Organizaciones = arrEntOrganizaciones;
-    entidades.Personas = arrEntPersonas;
-    entidades.Miscelaneas = arrEntMiscelaneas;
-    entidades.Preguntas = arrEntPreguntas;
-    entidades.VerbosDelDominio = arrEntVerbosDelDominio;
+    entidades.organizaciones = arrEntDependencias;
+    entidades.personas = arrEntPersonas;
+    entidades.miscelaneas = arrEntMiscelaneas;
+    entidades.preguntas = arrEntPreguntas;
+    entidades.verbosDelDominio = arrEntVerbosDelDominio;
 
     callback(null, collection);
+  }
+
+  saveDomain(domain) {
+    DomainSh.find({ type: domain.type }).exec((err, d) => {
+      if (d.length == 0) {
+        let nDomain = new DomainSh(domain);
+
+        nDomain.save(function(err) {
+          if (err) return handleError(err);
+        });
+
+        Belief.find({ name: domain.type }).exec((err, b) => {
+          if (b.length == 0) Belief.create({ name: domain.type });
+        });
+      } else {
+        console.log("El nombre del dominio ya existe");
+      }
+    });
+  }
+
+  addToDomain(cbTD, domain, registro) {
+    let arrObj = [];
+    registro.dependencia.split(".").forEach(element => {
+      arrObj.push({ _id: new ObjectId(), name: element.toLowerCase().trim() });
+    });
+
+    async.eachSeries(
+      arrObj,
+      (obj, cbObj) => {
+        Belief.find({ name: obj.name }).exec((err, f) => {
+          let id;
+          if (f.length == 0) {
+            Belief.create(obj);
+            id = obj._id;
+          } else {
+            id = f[0]._id;
+          }
+
+          DomainSh.update(
+            { type: domain.type },
+            { $addToSet: { elements: id } }
+          ).exec((err, r) => {
+            if (err) throw err;
+            cbObj();
+          });
+        });
+      },
+      err => {
+        cbTD();
+      }
+    );
+  }
+  processElaborationOfQuestions(callback, registro, dominio) {
+    let preguntasGeneradas = [];
+
+    if (
+      registro.entidadesSolicitud.preguntas != undefined &&
+      registro.entidadesSolicitud.preguntas.length != 0
+    ) {
+      //registro.entidadesSolicitud.preguntas.forEach(pregunta => {
+      async.eachSeries(
+        registro.entidadesSolicitud.preguntas,
+        (pregunta, cbPreg) => {
+          //this.questionWords.forEach(qw => {
+          async.eachSeries(this.questionWords, (qw, cbQW) => {
+            let objQ = {};
+            if (
+              _.findIndex(qw.eP, function(o) {
+                return o == pregunta;
+              }) > 0
+            ) {
+              let iLM = registro.entidadesSolicitud.miscelaneas.length - 1;
+              let lastMisc = registro.entidadesSolicitud.miscelaneas[iLM];
+              let pMisc = registro.solicitud.indexOf(lastMisc);
+              let pPreg = registro.solicitud.indexOf(pregunta);
+              let preg = registro.solicitud.substring(
+                pPreg,
+                pMisc + lastMisc.length
+              );
+
+              let resp = registro.entidadesRespuesta[qw.eR][0];
+              let palRel = registro.entidadesSolicitud.miscelaneas;
+
+              if (preg != undefined && resp != undefined) {
+                _.set(objQ, "pregunta", preg);
+                _.set(objQ, "respuesta", resp);
+                _.set(objQ, "palabrasRelevantes", palRel);
+                _.set(objQ, "seleccionado", true);
+              }
+              _.set(registro, "preguntasGeneradas", objQ);
+              cbQW();
+            } else {
+              cbQW();
+            }
+          });
+          cbPreg();
+        }
+      );
+    }
+    callback();
+  }
+
+  getPalabrasClaves(cbRel, palRel) {
+    //recorrer palabras y hacer population por grupos
+    let type = palRel.type;
+    let preguntas = palRel.preguntas;
+    async.eachSeries(
+      preguntas,
+      (pregunta, cbPreg) => {
+        Belief.find({ name: { $in: pregunta.palabrasRelevantes } })
+          .populate({
+            path: "attributes.meronym",
+            model: "Belief",
+            populate: {
+              path: "attributes.meronym",
+              model: "Belief",
+              populate: {
+                path: "attributes.meronym",
+                model: "Belief",
+                select: "name -_id"
+                //match: { name: { $in: lema } }
+              }
+            }
+          })
+          .exec((err, d) => {
+            console.log(JSON.stringify(d, null, 2));
+            //_.set(objQ, "palabrasClave", palClav);
+          });
+      },
+      err => {
+        cbRel();
+      }
+    );
   }
 }
 

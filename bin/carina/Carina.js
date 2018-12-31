@@ -22,7 +22,6 @@ class Carina {
     perception.socket = this.socket;
     perception.postCognitiveModel(body);
   }
-
   relationedWords(body) {
     perception.io = this.io;
     perception.socket = this.socket;

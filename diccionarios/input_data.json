@@ -1,0 +1,131 @@
+{
+  "contexto": {
+    "nombre": "Ejemplo",
+    "descripcion": "Esta es una descripción",
+    "palabrasClave": [
+      "fecha",
+      "cierre",
+      "convocatoria",
+      "proyectos",
+      "investigación"
+    ],
+    "dependencias": [],
+    "palabrasCompuestas": [],
+    "palabrasRelevantes": [],
+    "palabrasCandidatas": [],
+    "palabrasDescartadas": [],
+    "categorias": []
+  },
+  "entidades": {
+    "lugares": [],
+    "fechas": [],
+    "organizaciones": [],
+    "personas": [],
+    "miscelaneas": [],
+    "preguntas": [],
+    "verbosDelDominio": []
+  },
+  "registros": [
+    {
+      "fecha": "10/02/2018",
+      "hora": "10:30 am",
+      "tipo": "",
+      "solicitud": "por favor me pueden informar cuando es la fecha de cierre convocatoria de los proyectos de investigación",
+      "dependencia": "Investigación",
+      "respuesta": "La fecha de cierre es el 5 de diciembre de 2018",
+      "observaciones": "",
+      "palabrasClave": [],
+      "palabrasCandidatas": [],
+      "palabrasRelevantes": [],
+      "palabrsCompuestas": [],
+      "palabrasDescartadas": [],
+      "verbosSolcitudes": [],
+      "categorias": [],
+      "entidadesSolicitud": {
+        "fechas": [],
+        "lugares": [],
+        "miscelaneas": []
+      },
+      "entidadesRespuesta": {
+        "fecha": [],
+        "miscelaneas": []
+      }
+    },
+    {
+      "fecha": "11/02/2018",
+      "hora": "10:30 am",
+      "tipo": "",
+      "solicitud": "Necesito saber que papeles debo de tener en cuenta para presentar un proyecto de investigación",
+      "dependencia": "Investigación, Extensión",
+      "respuesta": "Se deben presentar los siguientes formatos diligenciados: a. Formato de proyecto de investigación y extensión: F2080 y b. Formato F2081",
+      "observaciones": "",
+      "palabrasClave": [],
+      "palabrasCandidatas": [],
+      "palabrasRelevantes": [],
+      "palabrsCompuestas": [],
+      "palabrasDescartadas": [],
+      "verbosSolcitudes": [],
+      "categorias": [],
+      "entidadesSolicitud": {
+        "fechas": [],
+        "lugares": [],
+        "miscelaneas": []
+      },
+      "entidadesRespuesta": {
+        "fecha": [],
+        "miscelaneas": []
+      }
+    },
+    {
+      "fecha": "10/03/2018",
+      "hora": "10:30 am",
+      "tipo": "",
+      "solicitud": "Cuál es la fecha de inicio del proyecto FE-002",
+      "dependencia": "Investigación, Extención",
+      "respuesta": "La fecha de inicio del proyecto es 3 de junio de 20018",
+      "observaciones": "",
+      "palabrasClave": [],
+      "palabrasCandidatas": [],
+      "palabrasRelevantes": [],
+      "palabrsCompuestas": [],
+      "palabrasDescartadas": [],
+      "verbosSolcitudes": [],
+      "categorias": [],
+      "entidadesSolicitud": {
+        "fechas": [],
+        "lugares": [],
+        "miscelaneas": []
+      },
+      "entidadesRespuesta": {
+        "fecha": [],
+        "miscelaneas": []
+      }
+    },
+    {
+      "fecha": "10/03/2018",
+      "hora": "10:30 am",
+      "tipo": "",
+      "solicitud": "Quien es el encargado de recepcionar los proyectos de extensión",
+      "dependencia": "Extensión",
+      "respuesta": "Maria Perez es la persona encargada de recepcionar los proyectos de extensión",
+      "observaciones": "",
+      "palabrasClave": [],
+      "palabrasCandidatas": [],
+      "palabrasRelevantes": [],
+      "palabrsCompuestas": [],
+      "palabrasDescartadas": [],
+      "verbosSolcitudes": [],
+      "categorias": [],
+      "entidadesSolicitud": {
+        "fechas": [],
+        "lugares": [],
+        "miscelaneas": []
+      },
+      "entidadesRespuesta": {
+        "fecha": [],
+        "miscelaneas": []
+      }
+    }
+  ],
+  "relaciones": []
+}
