@@ -47,9 +47,7 @@ class Perception {
       err => {
         if (this.socket != undefined)
           this.socket.emit("returnDataWithKeyWords", collection);
-        /*console.log(
-          JSON.stringify(collection.contexto.preguntasGeneradas, null, 2)
-        );*/
+        console.log(JSON.stringify(collection, null, 2));
       }
     );
   }

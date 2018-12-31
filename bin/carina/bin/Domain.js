@@ -292,8 +292,7 @@ class Domain {
         arrEntPersonas,
         arrEntMiscelaneas,
         arrEntPreguntas,
-        arrEntVerbosDelDominio,
-        arrPreguntasGeneradas
+        arrEntVerbosDelDominio
       )
     );
 
