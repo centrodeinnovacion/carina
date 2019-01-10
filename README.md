@@ -46,3 +46,7 @@ Disponible [CARINA Api REST](http://carinalab.co/) v 3.0. para ver la documentac
 ## Start server with pm2
 
 `pm2 start server`
+
+## Documents
+
+[https://github.com/centrodeinnovacion/carina/tree/master/docs/docs_lib](https://github.com/centrodeinnovacion/carina/tree/master/docs/docs_lib)
