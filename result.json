@@ -1,0 +1,369 @@
+{
+  "contexto": {
+    "nombre": "Ejemplo 3",
+    "descripcion": "Esta es una descripción",
+    "palabrasClave": [
+      "fecha",
+      "cierre",
+      "convocatoria",
+      "proyectos",
+      "investigación"
+    ],
+    "dependencias": ["Extensión"],
+    "palabrasCompuestas": [],
+    "palabrasRelevantes": [
+      "Extensión",
+      "Extensión",
+      "abelardo",
+      "vega",
+      "encargado",
+      "recepcionar",
+      "proyectos",
+      "extensión",
+      "abelardo",
+      "vega",
+      "persona",
+      "encargada",
+      "recepcionar",
+      "proyectos",
+      "extensión",
+      "quien"
+    ],
+    "palabrasCandidatas": [
+      "Extensión",
+      "Extensión",
+      "abelardo",
+      "vega",
+      "encargado",
+      "recepcionar",
+      "proyectos",
+      "extensión",
+      "abelardo",
+      "vega",
+      "persona",
+      "encargada",
+      "recepcionar",
+      "proyectos",
+      "extensión",
+      "quien"
+    ],
+    "palabrasDescartadas": [
+      "quien",
+      "es",
+      "el",
+      "encargado",
+      "de",
+      "recepcionar",
+      "los",
+      "proyectos",
+      "de",
+      "extensión"
+    ],
+    "categorias": [],
+    "preguntasGeneradas": [
+      {
+        "pregunta": "cuando es la fecha de cierre convocatoria de los proyectos de investigación",
+        "respuesta": "5 de diciembre de 2018",
+        "palabrasRelevantes": [
+          "favor",
+          "fecha",
+          "cierre",
+          "convocatoria",
+          "proyectos",
+          "investigación"
+        ],
+        "seleccionado": true
+      },
+      {
+        "pregunta": "que papeles debo de tener en cuenta para presentar un proyecto de investigación",
+        "respuesta": "Investigación, Extensión",
+        "palabrasRelevantes": [
+          "necesito",
+          "papeles",
+          "debo",
+          "proyecto",
+          "investigación"
+        ],
+        "seleccionado": true
+      }
+    ]
+  },
+  "entidades": {
+    "lugares": [],
+    "fechas": [],
+    "organizaciones": ["Extensión"],
+    "personas": ["abelardo", "vega"],
+    "miscelaneas": [
+      "encargado",
+      "recepcionar",
+      "proyectos",
+      "extensión",
+      "abelardo",
+      "vega",
+      "persona",
+      "encargada",
+      "recepcionar",
+      "proyectos",
+      "extensión"
+    ],
+    "preguntas": ["quien"],
+    "verbosDelDominio": [],
+    "Fechas": []
+  },
+  "registros": [
+    {
+      "fecha": "10/02/2018",
+      "hora": "10:30 am",
+      "tipo": "",
+      "solicitud": "por favor me pueden informar cuando es la fecha de cierre convocatoria de los proyectos de investigación",
+      "dependencia": "Investigación",
+      "respuesta": "La fecha de cierre es el 5 de diciembre de 2018",
+      "observaciones": "",
+      "palabrasClave": [],
+      "palabrasCandidatas": [],
+      "palabrasRelevantes": [],
+      "palabrsCompuestas": [],
+      "palabrasDescartadas": [
+        "por",
+        "favor",
+        "me",
+        "pueden",
+        "cuando",
+        "es",
+        "la",
+        "fecha",
+        "de",
+        "cierre",
+        "convocatoria",
+        "de",
+        "los",
+        "proyectos",
+        "de",
+        "investigación"
+      ],
+      "verbosSolcitudes": [],
+      "categorias": [],
+      "entidadesSolicitud": {
+        "fechas": [],
+        "lugares": [],
+        "miscelaneas": [
+          "favor",
+          "fecha",
+          "cierre",
+          "convocatoria",
+          "proyectos",
+          "investigación"
+        ],
+        "personas": [],
+        "preguntas": ["cuando"],
+        "verbosSolcitudes": ["informar"]
+      },
+      "entidadesRespuesta": {
+        "fecha": [],
+        "miscelaneas": ["fecha", "cierre"],
+        "personas": [],
+        "preguntas": [],
+        "fechas": ["5 de diciembre de 2018", "5 de diciembre"],
+        "organizaciones": ["Investigación"],
+        "dependencias": ["Investigación"]
+      },
+      "preguntasGeneradas": {
+        "pregunta": "cuando es la fecha de cierre convocatoria de los proyectos de investigación",
+        "respuesta": "5 de diciembre de 2018",
+        "palabrasRelevantes": [
+          "favor",
+          "fecha",
+          "cierre",
+          "convocatoria",
+          "proyectos",
+          "investigación"
+        ],
+        "seleccionado": true
+      }
+    },
+    {
+      "fecha": "11/02/2018",
+      "hora": "10:30 am",
+      "tipo": "",
+      "solicitud": "Necesito saber que papeles debo de tener en cuenta para presentar un proyecto de investigación",
+      "dependencia": "Investigación, Extensión",
+      "respuesta": "Se deben presentar los siguientes formatos diligenciados: a. Formato de proyecto de investigación y extensión: F2080 y b. Formato F2081",
+      "observaciones": "",
+      "palabrasClave": [],
+      "palabrasCandidatas": [],
+      "palabrasRelevantes": [],
+      "palabrsCompuestas": [],
+      "palabrasDescartadas": [
+        "Necesito",
+        "que",
+        "papeles",
+        "debo",
+        "de",
+        "en",
+        "cuenta",
+        "para",
+        "un",
+        "proyecto",
+        "de",
+        "investigación"
+      ],
+      "verbosSolcitudes": [],
+      "categorias": [],
+      "entidadesSolicitud": {
+        "fechas": [],
+        "lugares": [],
+        "miscelaneas": [
+          "necesito",
+          "papeles",
+          "debo",
+          "proyecto",
+          "investigación"
+        ],
+        "personas": [],
+        "preguntas": ["que"],
+        "verbosSolcitudes": ["saber", "tener", "presentar"]
+      },
+      "entidadesRespuesta": {
+        "fecha": [],
+        "miscelaneas": [
+          "siguientes",
+          "formatos",
+          "diligenciados:",
+          "a.",
+          "formato",
+          "proyecto",
+          "investigación",
+          "extensión:",
+          "f2080",
+          "b.",
+          "formato",
+          "f2081"
+        ],
+        "personas": [],
+        "preguntas": [],
+        "fechas": [],
+        "organizaciones": ["Investigación, Extensión"],
+        "dependencias": ["Investigación, Extensión"]
+      },
+      "preguntasGeneradas": {
+        "pregunta": "que papeles debo de tener en cuenta para presentar un proyecto de investigación",
+        "respuesta": "Investigación, Extensión",
+        "palabrasRelevantes": [
+          "necesito",
+          "papeles",
+          "debo",
+          "proyecto",
+          "investigación"
+        ],
+        "seleccionado": true
+      }
+    },
+    {
+      "fecha": "10/03/2018",
+      "hora": "10:30 am",
+      "tipo": "",
+      "solicitud": "cual es la fecha de inicio del proyecto FE-002",
+      "dependencia": "Investigación, Extención",
+      "respuesta": "La fecha de inicio del proyecto es 3 de junio de 20018",
+      "observaciones": "",
+      "palabrasClave": [],
+      "palabrasCandidatas": [],
+      "palabrasRelevantes": [],
+      "palabrsCompuestas": [],
+      "palabrasDescartadas": [
+        "cual",
+        "es",
+        "la",
+        "fecha",
+        "de",
+        "inicio",
+        "del",
+        "proyecto",
+        "FE-002"
+      ],
+      "verbosSolcitudes": [],
+      "categorias": [],
+      "entidadesSolicitud": {
+        "fechas": [],
+        "lugares": [],
+        "miscelaneas": ["fecha", "inicio", "proyecto", "fe-002"],
+        "personas": [],
+        "preguntas": ["cual"],
+        "verbosSolcitudes": []
+      },
+      "entidadesRespuesta": {
+        "fecha": [],
+        "miscelaneas": ["fecha", "inicio", "proyecto"],
+        "personas": [],
+        "preguntas": [],
+        "fechas": ["3 de junio de 2001", "3 de junio"],
+        "organizaciones": ["Investigación, Extención"],
+        "dependencias": ["Investigación, Extención"]
+      }
+    },
+    {
+      "fecha": "10/03/2018",
+      "hora": "10:30 am",
+      "tipo": "",
+      "solicitud": "quien es el encargado de recepcionar los proyectos de extensión",
+      "dependencia": "Extensión",
+      "respuesta": "abelardo vega es la persona encargada de recepcionar los proyectos de extensión",
+      "observaciones": "",
+      "palabrasClave": [],
+      "palabrasCandidatas": [],
+      "palabrasRelevantes": [],
+      "palabrsCompuestas": [],
+      "palabrasDescartadas": [
+        "quien",
+        "es",
+        "el",
+        "encargado",
+        "de",
+        "recepcionar",
+        "los",
+        "proyectos",
+        "de",
+        "extensión"
+      ],
+      "verbosSolcitudes": [],
+      "categorias": [],
+      "entidadesSolicitud": {
+        "fechas": [],
+        "lugares": [],
+        "miscelaneas": ["encargado", "recepcionar", "proyectos", "extensión"],
+        "personas": [],
+        "preguntas": ["quien"],
+        "verbosSolcitudes": []
+      },
+      "entidadesRespuesta": {
+        "fecha": [],
+        "miscelaneas": [
+          "abelardo",
+          "vega",
+          "persona",
+          "encargada",
+          "recepcionar",
+          "proyectos",
+          "extensión"
+        ],
+        "personas": ["abelardo", "vega"],
+        "preguntas": [],
+        "fechas": [],
+        "organizaciones": ["Extensión"],
+        "dependencias": ["Extensión"]
+      },
+      "preguntasGeneradas": {
+        "pregunta": "quien es el encargado de recepcionar los proyectos de extensión",
+        "respuesta": "abelardo",
+        "palabrasRelevantes": [
+          "encargado",
+          "recepcionar",
+          "proyectos",
+          "extensión"
+        ],
+        "seleccionado": true
+      }
+    }
+  ],
+  "relaciones": []
+}

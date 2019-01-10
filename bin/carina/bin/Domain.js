@@ -297,19 +297,19 @@ class Domain {
     );
 
     //compilation
-    contexto.dependencias = arrDep;
-    contexto.palabrasDescartadas = arrPalDesc;
-    contexto.palabrasRelevantes = arrPalCan;
-    contexto.palabrasCandidatas = arrPalCan;
-    contexto.dependencias = arrEntDependencias;
-    contexto.preguntasGeneradas = arrPreguntasGeneradas;
-    entidades.lugares = arrEntLugares;
-    entidades.Fechas = arrEntFechas;
-    entidades.organizaciones = arrEntDependencias;
-    entidades.personas = arrEntPersonas;
-    entidades.miscelaneas = arrEntMiscelaneas;
-    entidades.preguntas = arrEntPreguntas;
-    entidades.verbosDelDominio = arrEntVerbosDelDominio;
+    contexto.dependencias = _.uniq(arrDep, e => e);
+    contexto.palabrasDescartadas = _.uniq(arrPalDesc, e => e);
+    contexto.palabrasRelevantes = _.uniq(arrPalCan, e => e);
+    contexto.palabrasCandidatas = _.uniq(arrPalCan, e => e);
+    contexto.dependencias = _.uniq(arrEntDependencias, e => e);
+    contexto.preguntasGeneradas = _.uniq(arrPreguntasGeneradas, e => e);
+    entidades.lugares = _.uniq(arrEntLugares, e => e);
+    entidades.Fechas = _.uniq(arrEntFechas, e => e);
+    entidades.organizaciones = _.uniq(arrEntDependencias, e => e);
+    entidades.personas = _.uniq(arrEntPersonas, e => e);
+    entidades.miscelaneas = _.uniq(arrEntMiscelaneas, e => e);
+    entidades.preguntas = _.uniq(arrEntPreguntas, e => e);
+    entidades.verbosDelDominio = _.uniq(arrEntVerbosDelDominio, e => e);
 
     callback(null, collection);
   }
