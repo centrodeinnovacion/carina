@@ -365,6 +365,12 @@ class Domain {
     );
   }
   processElaborationOfQuestions(callback, registro, dominio) {
+    let arrQst = [
+      ["que", "qué"],
+      ["quien", "quién"],
+      ["donde", "dónde"],
+      ["cual", "cuál"]
+    ];
     let preguntasGeneradas = [];
 
     if (
@@ -392,11 +398,14 @@ class Domain {
                 pMisc + lastMisc.length
               );
 
-              let resp = registro.entidadesRespuesta[qw.eR][0];
+              let resp = registro.entidadesRespuesta[qw.eR];
               let palRel = registro.entidadesSolicitud.miscelaneas;
+              arrQst.forEach(
+                q => (preg = _.replace(preg.toLowerCase(), q[0], q[1]))
+              );
 
               if (preg != undefined && resp != undefined) {
-                _.set(objQ, "pregunta", preg);
+                _.set(objQ, "pregunta", `¿${_.capitalize(preg)}?`);
                 _.set(objQ, "respuesta", resp);
                 _.set(objQ, "palabrasRelevantes", palRel);
                 _.set(objQ, "seleccionado", true);

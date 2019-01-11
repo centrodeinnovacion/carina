@@ -17,9 +17,14 @@ class Perception {
     let palabrasClave = contexto.palabrasClave;
     let registros = collection.registros;
 
-    async.eachSeries(
+    async.eachOfSeries(
       registros,
-      (registro, cbReg) => {
+      (registro, key, cbReg) => {
+        if (this.socket != undefined)
+          this.socket.emit("progressBar", {
+            item: key + 1,
+            length: registros.length
+          });
         async.autoInject(
           {
             eEFD: callback => {
@@ -47,7 +52,7 @@ class Perception {
       err => {
         if (this.socket != undefined)
           this.socket.emit("returnDataWithKeyWords", collection);
-        console.log(JSON.stringify(collection, null, 2));
+        //console.log(JSON.stringify(collection, null, 2));
       }
     );
   }
