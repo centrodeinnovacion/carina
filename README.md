@@ -15,15 +15,15 @@ Agente Cognitivo para el reconocimiento de discusiones públicas guiadas en leng
 
 ### Instalación
 
-`yarn install`
+`yarn install` o `npm install`
 
 ### Running the tests
 
-`yarn test`
+`yarn test` o `npm test`
 
 ### Deployment
 
-`yarn server`
+`yarn server` o `npm server`
 
 ## Url
 
@@ -35,6 +35,18 @@ Agente Cognitivo para el reconocimiento de discusiones públicas guiadas en leng
 Disponible [CARINA Api REST](http://carinalab.co/) v 3.0. para ver la documentación [CARINA documentos](https://github.com/centrodeinnovacion/carina/docs).
 
 
-## Start server
+## Start server development
 
-yarn dev
+`yarn dev` o `npm dev`
+
+## Start server with Node
+
+`node server`
+
+## Start server with pm2
+
+`pm2 start server`
+
+## Documents
+
+[https://github.com/centrodeinnovacion/carina/tree/master/docs/docs_lib](https://github.com/centrodeinnovacion/carina/tree/master/docs/docs_lib)
