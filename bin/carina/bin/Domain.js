@@ -401,7 +401,7 @@ class Domain {
                 pMisc + lastMisc.length
               );
 
-              let resp = registro.entidadesRespuesta[qw.eR];
+              let resp = registro.entidadesRespuesta[qw.eR][0];
               let palRel = registro.entidadesSolicitud.miscelaneas;
               arrQst.forEach(
                 q => (preg = _.replace(preg.toLowerCase(), q[0], q[1]))
