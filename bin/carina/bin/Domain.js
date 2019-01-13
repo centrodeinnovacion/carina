@@ -321,10 +321,13 @@ class Domain {
 
         nDomain.save(function(err) {
           if (err) return handleError(err);
+          console.log("Domain created!");
         });
 
         Belief.find({ name: domain.type }).exec((err, b) => {
+          if (err) throw err;
           if (b.length == 0) Belief.create({ name: domain.type });
+          console.log("Belief created!");
         });
       } else {
         console.log("El nombre del dominio ya existe");

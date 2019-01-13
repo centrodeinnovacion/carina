@@ -20,7 +20,7 @@ class Perception {
     async.eachOfSeries(
       registros,
       (registro, key, cbReg) => {
-        console.info(`item: ${key} length: ${registros.length}`);
+        console.info(`item: ${key + 1} length: ${registros.length}`);
         if (this.socket != undefined)
           this.socket.emit("progressBar", {
             item: key + 1,
