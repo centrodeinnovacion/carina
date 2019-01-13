@@ -103,16 +103,21 @@ class Perception {
                 { $addToSet: { "attributes.holonym": t[0]._id } }
               ).exec(err => {
                 Belief.find({ name: relacion.palabraClave }).exec((err, kw) => {
-                  Belief.update(
-                    { _id: kw[0]._id },
-                    {
-                      $addToSet: {
-                        "attributes.meronym": t[0]._id
+                  //
+                  if (kw.length > 0) {
+                    Belief.update(
+                      { _id: kw[0]._id },
+                      {
+                        $addToSet: {
+                          "attributes.meronym": t[0]._id
+                        }
                       }
-                    }
-                  ).exec((err, a) => {
-                    if (err) throw err;
-                  });
+                    ).exec((err, a) => {
+                      if (err) throw err;
+                    });
+                  } else {
+                    //Belief.create({ name: relacion.palabraClave, attributes:{meronym: }});
+                  }
                 });
 
                 arrTemInt.push(t[0]._id);

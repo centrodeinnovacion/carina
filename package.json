@@ -5,6 +5,9 @@
   "repository": "https://gitlab.com/kikret/carina-g.git",
   "author": "Alexander Toscano Ricardo <kikret@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "scripts": {
     "server": "node server.js",
     "dev": "export NODE_ENV=development && nodemon --watch lib --watch bin ./server.js",
